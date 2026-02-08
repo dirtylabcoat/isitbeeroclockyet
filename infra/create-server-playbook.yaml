@@ -1,0 +1,68 @@
+---
+- name: Create cloud server
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  user: root
+  vars_files:
+    - vars/main.yaml
+    - vars/secret.yaml
+  tasks:
+    - name: Create ssh key
+      hetzner.hcloud.ssh_key:
+        api_token: "{{ hcloud_token }}"
+        name: fighterhayabusa
+        public_key: "{{ hcloud_ssh_key }}"
+        state: present
+    - name: Create firewall
+      hetzner.hcloud.firewall:
+        api_token: "{{ hcloud_token }}"
+        name: beer-firewall
+        rules:
+          - description: allow ssh from everywhere
+            direction: in
+            protocol: tcp
+            port: "22"
+            source_ips:
+              - 0.0.0.0/0
+              - ::/0
+          - description: allow http from everywhere
+            direction: in
+            protocol: tcp
+            port: "80"
+            source_ips:
+              - 0.0.0.0/0
+              - ::/0
+          - description: allow https from everywhere
+            direction: in
+            protocol: tcp
+            port: "443"
+            source_ips:
+              - 0.0.0.0/0
+              - ::/0
+        state: present
+        labels:
+          env: prod
+          project: "{{ project_name }}"
+    - name: Create server w ssh key
+      hetzner.hcloud.server:
+        api_token: "{{ hcloud_token }}"
+        name: beer-server
+        server_type: cx23
+        image: ubuntu-24.04
+        location: hel1
+        ssh_keys:
+          - fighterhayabusa
+        state: present
+        labels:
+          env: prod
+          project: "{{ project_name }}"
+      register: create_server_result
+    - name: Display the server info
+      debug:
+        msg: "{{ create_server_result.hcloud_server }}"
+    - name: Save server IP-address to inventory file
+      copy:
+        content: "[{{ project_name }}]\n{{ create_server_result.hcloud_server.ipv4_address }}"
+        dest: "./inventory"
+

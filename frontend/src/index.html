@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is it beer o'clock yet?</title>
+    <link rel="stylesheet" href="static/css/main.css"/>
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico"/>
+</head>
+<body>
+    <h1 id="beerMessage"></h1>
+
+    <div class="container">
+        <a class="schedule-toggle-link hidden" id="scheduleToggleLink">⚙️ Schedule</a>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="loginUsername">Username</label>
+                <input type="text" id="loginUsername" required>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+
+        <form id="registerForm" class="hidden">
+            <div class="form-group">
+                <label for="registerUsername">Username</label>
+                <input type="text" id="registerUsername" required>
+            </div>
+            <div class="form-group">
+                <label for="registerPassword">Password</label>
+                <input type="password" id="registerPassword" required>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+
+        <form id="beerScheduleForm" class="hidden">
+            <div class="form-group">
+                <label>Monday</label>
+                <div class="time-inputs">
+                    <input type="time" id="monday-start" value="16:30" required>
+                    <input type="time" id="monday-end" value="01:00" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Tuesday</label>
+                <div class="time-inputs">
+                    <input type="time" id="tuesday-start" value="16:30" required>
+                    <input type="time" id="tuesday-end" value="01:00" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Wednesday</label>
+                <div class="time-inputs">
+                    <input type="time" id="wednesday-start" value="16:30" required>
+                    <input type="time" id="wednesday-end" value="01:00" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Thursday</label>
+                <div class="time-inputs">
+                    <input type="time" id="thursday-start" value="16:30" required>
+                    <input type="time" id="thursday-end" value="01:00" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Friday</label>
+                <div class="time-inputs">
+                    <input type="time" id="friday-start" value="16:30" required>
+                    <input type="time" id="friday-end" value="01:00" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Saturday</label>
+                <div class="time-inputs">
+                    <input type="time" id="saturday-start" value="16:30" required>
+                    <input type="time" id="saturday-end" value="01:00" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Sunday</label>
+                <div class="time-inputs">
+                    <input type="time" id="sunday-start" value="16:30" required>
+                    <input type="time" id="sunday-end" value="01:00" required>
+                </div>
+            </div>
+            <button type="submit">Update Beer Schedule</button>
+        </form>
+
+        <button id="logoutButton" class="hidden">Logout</button>
+
+        <a class="toggle-link" id="toggleLink">No account? Register here!</a>
+    </div>
+    <script src="static/js/app.js"></script>
+</body>
+</html>
